@@ -2,7 +2,8 @@
   "name": "lazy-log",
   "version": "0.0.1",
   "description": "easy logger",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "typings": "dist/index",
   "scripts": {
     "test": "npm test"
   },
@@ -16,5 +17,8 @@
   "license": "MIT",
   "dependencies": {
     "colors": "^1.1.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0"
   }
 }
