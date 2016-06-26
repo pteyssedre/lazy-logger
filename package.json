@@ -1,0 +1,20 @@
+{
+  "name": "lazy-log",
+  "version": "0.0.1",
+  "description": "easy logger",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "keywords": [
+    "logger",
+    "color",
+    "easy",
+    "lazy"
+  ],
+  "author": "pteyssedre",
+  "license": "MIT",
+  "dependencies": {
+    "colors": "^1.1.2"
+  }
+}
