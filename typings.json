@@ -1,0 +1,7 @@
+{
+  "name": "lazy-log",
+  "dependencies": {},
+  "globalDependencies": {
+    "colors": "registry:dt/colors#0.6.0-1+20160501135139"
+  }
+}
