@@ -1,13 +1,13 @@
 var chai = require("chai");
 var expect = chai.expect;
-var LazyLog = require("../dist/index").LazyLog;
+var LazyLog = require("../dist/index");
 var LogLevel = LazyLog.LogLevel;
 var Logger = LazyLog.Logger;
 
 
 describe("Logger", function () {
 
-    var Log = new Logger(LogLevel.CRITICAL);
+    var Log = new Logger(LogLevel.ERROR);
 
     var data = function (){
         var e = Math.floor(Math.random() + 1) * 7;

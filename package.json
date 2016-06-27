@@ -1,6 +1,6 @@
 {
-  "name": "lazy-log",
-  "version": "0.0.2",
+  "name": "lazy-format-logger",
+  "version": "0.0.3",
   "description": "easy logger",
   "main": "dist/index.js",
   "typings": "dist/index",
