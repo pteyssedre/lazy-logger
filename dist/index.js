@@ -28,21 +28,21 @@ var Logger = (function () {
             var item = args[i];
             switch ((typeof item).toLowerCase()) {
                 case "function":
-                    var tr = b + item;
+                    var tr = b.trim() + item;
                     tr = tr.replace(/(\r\n|\n|\r)/gm, "");
                     while (tr.indexOf("  ") > -1) {
                         tr = tr.replace("  ", " ");
                     }
-                    str += tr + a;
+                    str += tr.trim() + a.trim();
                     break;
                 case "object":
-                    str += b + JSON.stringify(item) + a;
+                    str += b.trim() + JSON.stringify(item) + a.trim();
                     break;
                 default:
-                    str += b + item + a;
+                    str += b.trim() + item + a.trim();
                     break;
             }
-            line += " " + str;
+            line += " " + str.trim();
         }
         return line.trim();
     };
