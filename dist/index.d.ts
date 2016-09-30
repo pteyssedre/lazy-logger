@@ -5,6 +5,7 @@ export declare enum LogLevel {
     WARNING = 4,
     ERROR = 2,
     CRITICAL = 1,
+    NO_LOG = -1,
 }
 export declare class Logger {
     private level;

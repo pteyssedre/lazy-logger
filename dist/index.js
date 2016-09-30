@@ -6,6 +6,7 @@
     LogLevel[LogLevel["WARNING"] = 4] = "WARNING";
     LogLevel[LogLevel["ERROR"] = 2] = "ERROR";
     LogLevel[LogLevel["CRITICAL"] = 1] = "CRITICAL";
+    LogLevel[LogLevel["NO_LOG"] = -1] = "NO_LOG";
 })(exports.LogLevel || (exports.LogLevel = {}));
 var LogLevel = exports.LogLevel;
 var Logger = (function () {
@@ -47,6 +48,9 @@ var Logger = (function () {
         return line.trim();
     };
     Logger.prototype.log = function (level, any) {
+        if (this.level == LogLevel.NO_LOG) {
+            return;
+        }
         var data = [];
         data.push(LogLevel[level]);
         data.push(new Date().toISOString());

@@ -6,7 +6,8 @@ export enum LogLevel {
     INFO = 1 << 3,
     WARNING = 1 << 2,
     ERROR = 1 << 1,
-    CRITICAL = 1 << 0
+    CRITICAL = 1 << 0,
+    NO_LOG = -1
 }
 
 export class Logger {
@@ -55,6 +56,9 @@ export class Logger {
     }
 
     private log(level: LogLevel, any: any[]): void {
+        if (this.level == LogLevel.NO_LOG) {
+            return;
+        }
         var data = [];
         data.push(LogLevel[level]);
         data.push(new Date().toISOString());
