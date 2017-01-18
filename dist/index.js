@@ -1,4 +1,5 @@
 "use strict";
+var colors = require("colors");
 (function (LogLevel) {
     LogLevel[LogLevel["VERBOSE"] = 32] = "VERBOSE";
     LogLevel[LogLevel["DEBUG"] = 16] = "DEBUG";
@@ -9,6 +10,16 @@
     LogLevel[LogLevel["NO_LOG"] = -1] = "NO_LOG";
 })(exports.LogLevel || (exports.LogLevel = {}));
 var LogLevel = exports.LogLevel;
+var LogLevelText;
+(function (LogLevelText) {
+    LogLevelText[LogLevelText["VER"] = 32] = "VER";
+    LogLevelText[LogLevelText["DEB"] = 16] = "DEB";
+    LogLevelText[LogLevelText["INF"] = 8] = "INF";
+    LogLevelText[LogLevelText["WAR"] = 4] = "WAR";
+    LogLevelText[LogLevelText["ERR"] = 2] = "ERR";
+    LogLevelText[LogLevelText["CRI"] = 1] = "CRI";
+    LogLevelText[LogLevelText["NOL"] = -1] = "NOL";
+})(LogLevelText || (LogLevelText = {}));
 var Logger = (function () {
     function Logger(level) {
         if (isNaN(level)) {
@@ -52,25 +63,47 @@ var Logger = (function () {
             return;
         }
         var data = [];
-        data.push(LogLevel[level]);
+        data.push(LogLevelText[level]);
         data.push(new Date().toISOString());
         for (var i = 0; i < any.length; i++) {
             data.push(any[i]);
         }
         var line = this.formatLine(data);
-        console.log(line);
+        var color = colors.gray;
+        switch (level) {
+            case LogLevel.NO_LOG:
+                break;
+            case LogLevel.VERBOSE:
+                break;
+            case LogLevel.DEBUG:
+                color = colors.cyan;
+                break;
+            case LogLevel.INFO:
+                color = colors.green;
+                break;
+            case LogLevel.WARNING:
+                color = colors.yellow;
+                break;
+            case LogLevel.ERROR:
+                color = colors.red;
+                break;
+            case LogLevel.CRITICAL:
+                color = colors.red;
+                break;
+        }
+        console.log(color(line));
     };
     Logger.prototype.v = function () {
         var any = [];
         for (var _i = 0; _i < arguments.length; _i++) {
-            any[_i - 0] = arguments[_i];
+            any[_i] = arguments[_i];
         }
         this.log(LogLevel.VERBOSE, any);
     };
     Logger.prototype.i = function () {
         var any = [];
         for (var _i = 0; _i < arguments.length; _i++) {
-            any[_i - 0] = arguments[_i];
+            any[_i] = arguments[_i];
         }
         if (this.level >= LogLevel.INFO) {
             this.log(LogLevel.INFO, any);

@@ -9,6 +9,15 @@ export enum LogLevel {
     CRITICAL = 1 << 0,
     NO_LOG = -1
 }
+enum LogLevelText {
+    VER = 1 << 5,
+    DEB = 1 << 4,
+    INF = 1 << 3,
+    WAR = 1 << 2,
+    ERR = 1 << 1,
+    CRI = 1 << 0,
+    NOL = -1
+}
 
 export class Logger {
 
@@ -30,7 +39,7 @@ export class Logger {
         let sep = this.separator.split("@");
         let b = sep[0];
         let a = sep[1];
-        for (var i = 0; i < args.length; i++) {
+        for (let i = 0; i < args.length; i++) {
             let str = "";
             let item = args[i];
             switch ((typeof item).toLowerCase()) {
@@ -59,14 +68,36 @@ export class Logger {
         if (this.level == LogLevel.NO_LOG) {
             return;
         }
-        var data = [];
-        data.push(LogLevel[level]);
+        let data = [];
+        data.push(LogLevelText[level]);
         data.push(new Date().toISOString());
-        for (var i = 0; i < any.length; i++) {
+        for (let i = 0; i < any.length; i++) {
             data.push(any[i]);
         }
         let line = this.formatLine(data);
-        console.log(line);
+        let color = colors.gray;
+        switch (level){
+            case LogLevel.NO_LOG:
+                break;
+            case LogLevel.VERBOSE:
+                break;
+            case LogLevel.DEBUG:
+                color = colors.cyan;
+                break;
+            case LogLevel.INFO:
+                color = colors.green;
+                break;
+            case LogLevel.WARNING:
+                color = colors.yellow;
+                break;
+            case LogLevel.ERROR:
+                color = colors.red;
+                break;
+            case LogLevel.CRITICAL:
+                color = colors.red;
+                break;
+        }
+        console.log(color(line));
     }
 
     public v(...any: any[]): void {

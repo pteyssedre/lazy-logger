@@ -1,17 +1,16 @@
 import chai = require("chai");
-var expect = chai.expect;
 import LazyLog = require("../index");
 
 
 describe("Logger", function () {
 
-    var Log = new LazyLog.Logger();
+    let Log = new LazyLog.Logger();
 
-    var data = function () {
-        var e = Math.floor(Math.random() + 1) * 7;
+    let data = function () {
+        let e = Math.floor(Math.random() + 1) * 7;
         return e + "-" + e;
     };
-    var o = {
+    let o = {
         name: "jena",
         email: "toto@jena.com"
     };
@@ -24,7 +23,7 @@ describe("Logger", function () {
         Log.c("critical", "test", o, data);
     });
     it("Should log every line", () => {
-        var Log = new LazyLog.Logger(LazyLog.LogLevel.DEBUG);
+        let Log = new LazyLog.Logger(LazyLog.LogLevel.DEBUG);
         Log.v("verbose", "test", o, data);
         Log.d("debug", "test", o, data);
         Log.i("info", "test", o, data);
@@ -33,7 +32,7 @@ describe("Logger", function () {
         Log.c("critical", "test", o, data);
     });
     it("Should log all but DEBUG", () => {
-        var Log = new LazyLog.Logger(LazyLog.LogLevel.INFO);
+        let Log = new LazyLog.Logger(LazyLog.LogLevel.INFO);
         Log.v("verbose", "test", o, data);
         Log.d("debug", "test", o, data);
         Log.i("info", "test", o, data);
@@ -42,7 +41,7 @@ describe("Logger", function () {
         Log.c("critical", "test", o, data);
     });
     it("Should log WARNING and above", () => {
-        var Log = new LazyLog.Logger(LazyLog.LogLevel.WARNING);
+        let Log = new LazyLog.Logger(LazyLog.LogLevel.WARNING);
         Log.v("verbose", "test", o, data);
         Log.d("debug", "test", o, data);
         Log.i("info", "test", o, data);
@@ -51,7 +50,7 @@ describe("Logger", function () {
         Log.c("critical", "test", o, data);
     });
     it("Should log ERROR and above", () => {
-        var Log = new LazyLog.Logger(LazyLog.LogLevel.ERROR);
+        let Log = new LazyLog.Logger(LazyLog.LogLevel.ERROR);
         Log.v("verbose", "test", o, data);
         Log.d("debug", "test", o, data);
         Log.i("info", "test", o, data);
@@ -60,7 +59,7 @@ describe("Logger", function () {
         Log.c("critical", "test", o, data);
     });
     it("Should log CRITICAL and above", () => {
-        var Log = new LazyLog.Logger(LazyLog.LogLevel.CRITICAL);
+        let Log = new LazyLog.Logger(LazyLog.LogLevel.CRITICAL);
         Log.v("verbose", "test", o, data);
         Log.d("debug", "test", o, data);
         Log.i("info", "test", o, data);
