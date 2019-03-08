@@ -2,7 +2,10 @@ import moment = require('moment');
 import { LogLevel } from './logger/log-level';
 import { LoggerPipe } from './logger/pipe/console-log-pipe';
 import { LogOptions } from "./logger/log-options";
-import { log } from "util";
+
+export { LogOptions } from "./logger/log-options";
+export { LoggerPipe } from './logger/pipe/console-log-pipe';
+export { LogLevel } from './logger/log-level';
 
 export class Logger {
 

@@ -3,6 +3,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var moment = require("moment");
 var log_level_1 = require("./logger/log-level");
 var log_options_1 = require("./logger/log-options");
+var log_options_2 = require("./logger/log-options");
+exports.LogOptions = log_options_2.LogOptions;
+var log_level_2 = require("./logger/log-level");
+exports.LogLevel = log_level_2.LogLevel;
 var Logger = /** @class */ (function () {
     function Logger(options) {
         this.options = log_options_1.LogOptions.enhanceOptions(options);

@@ -1,6 +1,9 @@
 import { LogLevel } from './logger/log-level';
 import { LoggerPipe } from './logger/pipe/console-log-pipe';
 import { LogOptions } from "./logger/log-options";
+export { LogOptions } from "./logger/log-options";
+export { LoggerPipe } from './logger/pipe/console-log-pipe';
+export { LogLevel } from './logger/log-level';
 export declare class Logger {
     private queue;
     readonly options: LogOptions;
