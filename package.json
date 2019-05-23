@@ -1,12 +1,12 @@
 {
   "name": "lazy-format-logger",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "easy logger",
   "main": "dist/index.js",
   "typings": "dist/index",
   "scripts": {
     "prepublish": "tsc",
-    "test": "npm test"
+    "test": "mocha"
   },
   "keywords": [
     "logger",
@@ -27,7 +27,7 @@
     "@types/mocha": "^5.2.6",
     "@types/node": "^11.10.4",
     "chai": "^3.5.0",
-    "mocha": "^6.0.2",
+    "mocha": "^6.1.4",
     "ts-node": "^8.0.2",
     "typescript": "^3.3.3333"
   }

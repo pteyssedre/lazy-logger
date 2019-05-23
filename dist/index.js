@@ -92,6 +92,8 @@ var Logger = /** @class */ (function () {
         if (this.isEnabled(level)) {
             var data = [];
             data.push(this.currentTime);
+            if (this.options.class)
+                data.push(this.options.class);
             data.push.apply(data, any);
             this.push(level, data);
         }

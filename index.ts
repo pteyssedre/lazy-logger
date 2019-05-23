@@ -1,11 +1,11 @@
 import moment = require('moment');
-import { LogLevel } from './logger/log-level';
-import { LoggerPipe } from './logger/pipe/console-log-pipe';
-import { LogOptions } from "./logger/log-options";
+import {LogLevel} from './logger/log-level';
+import {LoggerPipe} from './logger/pipe/console-log-pipe';
+import {LogOptions} from "./logger/log-options";
 
-export { LogOptions } from "./logger/log-options";
-export { LoggerPipe } from './logger/pipe/console-log-pipe';
-export { LogLevel } from './logger/log-level';
+export {LogOptions} from "./logger/log-options";
+export {LoggerPipe} from './logger/pipe/console-log-pipe';
+export {LogLevel} from './logger/log-level';
 
 export class Logger {
 
@@ -81,6 +81,8 @@ export class Logger {
         if (this.isEnabled(level)) {
             let data = [];
             data.push(this.currentTime);
+            if (this.options.class)
+                data.push(this.options.class);
             data.push(...any);
             this.push(level, data);
         }
