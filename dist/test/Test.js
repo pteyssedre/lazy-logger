@@ -51,7 +51,7 @@ describe("Logger", function () {
         email: "toto@jena.com"
     };
     it("Should log data into a queue", function () {
-        var log = new index_1.Logger({ separator: "@" });
+        var log = new index_1.Logger({ separator: "@ |" });
         log.d("data", data, ["test", "mocha"]);
         var lines = log.flushQueue();
         expect(lines.length).to.be.equal(1);

@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var moment = require("moment");
 var log_level_1 = require("./logger/log-level");
+var console_log_pipe_1 = require("./logger/pipe/console-log-pipe");
 var log_options_1 = require("./logger/log-options");
 var log_options_2 = require("./logger/log-options");
 exports.LogOptions = log_options_2.LogOptions;
@@ -13,6 +14,9 @@ var Logger = /** @class */ (function () {
         this.options = log_options_1.LogOptions.enhanceOptions(options);
         if (!this.options.class && !this.scope) {
             this.options.class = this.constructor.name;
+        }
+        if (!this.options.pipes || this.options.pipes.length === 0) {
+            this.options.pipes = [new console_log_pipe_1.ConsoleLogPipe(this.options)];
         }
         this.queue = [];
     }

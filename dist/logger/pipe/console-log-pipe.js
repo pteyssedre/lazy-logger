@@ -14,12 +14,11 @@ var LogLevelText;
     LogLevelText[LogLevelText["NOL"] = -1] = "NOL";
 })(LogLevelText || (LogLevelText = {}));
 var ConsoleLogPipe = /** @class */ (function () {
-    function ConsoleLogPipe(separator) {
-        this.separator = separator;
-        console.log('ConsoleLogPipe', this.separator);
+    function ConsoleLogPipe(options) {
+        this.options = options;
     }
     ConsoleLogPipe.prototype.formatLine = function (level, args) {
-        var ba = this.separator.split('@');
+        var ba = this.options.separator.split('@');
         var b = ba[0];
         var a = ba[1];
         var line = b + LogLevelText[level] + a;
@@ -28,18 +27,18 @@ var ConsoleLogPipe = /** @class */ (function () {
             var item = args[i];
             switch ((typeof item).toLowerCase()) {
                 case "function":
-                    var tr = b.trim() + item;
+                    var tr = b + item;
                     tr = tr.replace(/(\r\n|\n|\r)/gm, "");
                     while (tr.indexOf("  ") > -1) {
                         tr = tr.replace("  ", " ");
                     }
-                    str += tr.trim() + a.trim();
+                    str += tr.trim() + a;
                     break;
                 case "object":
-                    str += b.trim() + circular.stringify(item) + a.trim();
+                    str += b + circular.stringify(item) + a;
                     break;
                 default:
-                    str += b.trim() + item + a.trim();
+                    str += b + item + a;
                     break;
             }
             line += " " + str.trim();

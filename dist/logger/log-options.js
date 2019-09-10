@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var log_level_1 = require("./log-level");
-var console_log_pipe_1 = require("./pipe/console-log-pipe");
 var LogOptions = /** @class */ (function () {
     function LogOptions(klass, level, tags, pipes, separator) {
         if (level === void 0) { level = log_level_1.LogLevel.VERBOSE; }
@@ -13,9 +12,6 @@ var LogOptions = /** @class */ (function () {
         this.tags = tags;
         this.separator = separator;
         this.pipes = pipes;
-        if (!this.pipes || this.pipes.length === 0) {
-            this.pipes = [new console_log_pipe_1.ConsoleLogPipe(separator)];
-        }
     }
     LogOptions.enhanceOptions = function (options) {
         var opts = new LogOptions();
