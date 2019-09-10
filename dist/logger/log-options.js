@@ -11,13 +11,11 @@ var LogOptions = /** @class */ (function () {
         this.class = klass;
         this.level = level;
         this.tags = tags;
-        if (!pipes || pipes.length === 0) {
-            this.pipes = [new console_log_pipe_1.ConsoleLogPipe()];
-        }
-        else {
-            this.pipes = pipes;
-        }
         this.separator = separator;
+        this.pipes = pipes;
+        if (!this.pipes || this.pipes.length === 0) {
+            this.pipes = [new console_log_pipe_1.ConsoleLogPipe(separator)];
+        }
     }
     LogOptions.enhanceOptions = function (options) {
         var opts = new LogOptions();

@@ -8,9 +8,10 @@ exports.LogOptions = log_options_2.LogOptions;
 var log_level_2 = require("./logger/log-level");
 exports.LogLevel = log_level_2.LogLevel;
 var Logger = /** @class */ (function () {
-    function Logger(options) {
+    function Logger(options, scope) {
+        this.scope = scope;
         this.options = log_options_1.LogOptions.enhanceOptions(options);
-        if (!this.options.class) {
+        if (!this.options.class && !this.scope) {
             this.options.class = this.constructor.name;
         }
         this.queue = [];
@@ -92,7 +93,9 @@ var Logger = /** @class */ (function () {
         if (this.isEnabled(level)) {
             var data = [];
             data.push(this.currentTime);
-            if (this.options.class)
+            if (this.scope)
+                data.push(this.scope);
+            else if (!this.scope && this.options.class)
                 data.push(this.options.class);
             data.push.apply(data, any);
             this.push(level, data);

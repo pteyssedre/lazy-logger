@@ -1,6 +1,7 @@
 import circular = require('circular-json');
 import colors = require('colors');
-import { LogLevel } from '../log-level';
+import {LogLevel} from '../log-level';
+import {LogOptions} from "../log-options";
 
 export interface LoggerPipe {
     log(level: LogLevel, data: any[]): void;
@@ -18,27 +19,32 @@ enum LogLevelText {
 
 export class ConsoleLogPipe implements LoggerPipe {
 
+    constructor(private options: LogOptions) {
+    }
+
+
     private formatLine(level: LogLevel, args: any[]): string {
-        let line = "[" + LogLevelText[level] + "]";
-        let b = "[";
-        let a = "]";
+        const ba = this.options.separator.split('@');
+        let b = ba[0];
+        let a = ba[1];
+        let line = b + LogLevelText[level] + a;
         for (let i = 0; i < args.length; i++) {
             let str = "";
             let item = args[i];
             switch ((typeof item).toLowerCase()) {
                 case "function":
-                    let tr = b.trim() + item;
+                    let tr = b + item;
                     tr = tr.replace(/(\r\n|\n|\r)/gm, "");
                     while (tr.indexOf("  ") > -1) {
                         tr = tr.replace("  ", " ");
                     }
-                    str += tr.trim() + a.trim();
+                    str += tr.trim() + a;
                     break;
                 case "object":
-                    str += b.trim() + circular.stringify(item) + a.trim();
+                    str += b + circular.stringify(item) + a;
                     break;
                 default:
-                    str += b.trim() + item + a.trim();
+                    str += b + item + a;
                     break;
             }
             line += " " + str.trim();

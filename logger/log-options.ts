@@ -1,5 +1,5 @@
-import { LogLevel } from "./log-level";
-import { ConsoleLogPipe, LoggerPipe } from "./pipe/console-log-pipe";
+import {LogLevel} from "./log-level";
+import {ConsoleLogPipe, LoggerPipe} from "./pipe/console-log-pipe";
 
 export class LogOptions {
     public class?: string;
@@ -16,12 +16,8 @@ export class LogOptions {
         this.class = klass;
         this.level = level;
         this.tags = tags;
-        if (!pipes || pipes.length === 0) {
-            this.pipes = [new ConsoleLogPipe()];
-        } else {
-            this.pipes = pipes;
-        }
         this.separator = separator;
+        this.pipes = pipes;
     }
 
     static enhanceOptions(options?: LogOptions) {

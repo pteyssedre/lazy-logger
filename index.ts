@@ -1,6 +1,6 @@
 import moment = require('moment');
 import {LogLevel} from './logger/log-level';
-import {LoggerPipe} from './logger/pipe/console-log-pipe';
+import {ConsoleLogPipe, LoggerPipe} from './logger/pipe/console-log-pipe';
 import {LogOptions} from "./logger/log-options";
 
 export {LogOptions} from "./logger/log-options";
@@ -12,11 +12,13 @@ export class Logger {
     private queue: any[];
     public readonly options: LogOptions;
 
-    constructor(options?: LogOptions) {
-
+    constructor(options?: LogOptions, private scope?: string) {
         this.options = LogOptions.enhanceOptions(options);
-        if (!this.options.class) {
+        if (!this.options.class && !this.scope) {
             this.options.class = this.constructor.name;
+        }
+        if (!this.options.pipes || this.options.pipes.length === 0) {
+            this.options.pipes = [new ConsoleLogPipe(this.options)];
         }
         this.queue = [];
     }
@@ -81,7 +83,9 @@ export class Logger {
         if (this.isEnabled(level)) {
             let data = [];
             data.push(this.currentTime);
-            if (this.options.class)
+            if (this.scope)
+                data.push(this.scope);
+            else if (!this.scope && this.options.class)
                 data.push(this.options.class);
             data.push(...any);
             this.push(level, data);

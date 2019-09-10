@@ -5,9 +5,10 @@ export { LogOptions } from "./logger/log-options";
 export { LoggerPipe } from './logger/pipe/console-log-pipe';
 export { LogLevel } from './logger/log-level';
 export declare class Logger {
+    private scope?;
     private queue;
     readonly options: LogOptions;
-    constructor(options?: LogOptions);
+    constructor(options?: LogOptions, scope?: string);
     push(level: LogLevel, data: any[]): void;
     use(pipe: LoggerPipe): void;
     v(...any: any[]): void;

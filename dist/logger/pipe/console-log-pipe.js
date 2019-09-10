@@ -14,12 +14,15 @@ var LogLevelText;
     LogLevelText[LogLevelText["NOL"] = -1] = "NOL";
 })(LogLevelText || (LogLevelText = {}));
 var ConsoleLogPipe = /** @class */ (function () {
-    function ConsoleLogPipe() {
+    function ConsoleLogPipe(separator) {
+        this.separator = separator;
+        console.log('ConsoleLogPipe', this.separator);
     }
     ConsoleLogPipe.prototype.formatLine = function (level, args) {
-        var line = "[" + LogLevelText[level] + "]";
-        var b = "[";
-        var a = "]";
+        var ba = this.separator.split('@');
+        var b = ba[0];
+        var a = ba[1];
+        var line = b + LogLevelText[level] + a;
         for (var i = 0; i < args.length; i++) {
             var str = "";
             var item = args[i];

@@ -16,7 +16,7 @@ describe("Logger", function () {
         email: "toto@jena.com"
     };
     it("Should log data into a queue", () => {
-        const log = new Logger();
+        const log = new Logger({separator: "@ |"});
         log.d("data", data, ["test", "mocha"]);
         const lines = log.flushQueue();
         expect(lines.length).to.be.equal(1);
